@@ -4,11 +4,27 @@
     <resultMap id="BaseResultMap" type="com.example.demo.entity.User">
         <result column="id" jdbcType="INTEGER" property="id"/>
         <result column="username" jdbcType="VARCHAR" property="username"/>
-        <result column="password" jdbcType="VARCHAR" property="password"/>
+        <result column="password" jdbcType="INTEGER" property="password"/>
     </resultMap>
+
+    <select id="getAll" resultType="com.example.demo.entity.User">
+        select * from user
+    </select>
 
     <select id="Sel" resultType="com.example.demo.entity.User">
         select * from user where id = #{id}
     </select>
+
+    <insert id="addUser" parameterType="com.example.demo.entity.User" keyProperty="id" useGeneratedKeys="true">
+        insert into user (id,username,password) values (#{id}, #{username, jdbcType=VARCHAR}, #{password)
+    </insert>
+
+    <delete id="delete" parameterType="int">
+        delete  from  user where id=#{id}
+    </delete>
+
+    <update id="update" parameterType="com.example.demo.entity.User">
+        update user set user.username=#{username},user.password=#{password}
+    </update>
 
 </mapper>
